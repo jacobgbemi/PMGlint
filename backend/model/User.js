@@ -22,7 +22,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: String
+    refreshToken: String,
+    employees: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Employee'
+        } 
+      ]
+}, {
+    timestamps: true
 });
 
 module.exports = mongoose.model('User', userSchema);
