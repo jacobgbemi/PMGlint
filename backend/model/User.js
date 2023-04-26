@@ -23,12 +23,10 @@ const userSchema = new Schema({
         required: true
     },
     refreshToken: String,
-    employees: [
-        {
+    project: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: 'Employee'
-        } 
-      ]
+          ref: 'Project'
+    } 
 }, {
     timestamps: true
 });

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const employeeSchema = new Schema({
+const projectSchema = new Schema({
     title: {
         type: String,
         required: true
@@ -30,14 +30,22 @@ const employeeSchema = new Schema({
            return this.planEnd;
         }
     },
-    userId: [
-        {
+    userId: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User'
         } 
-      ]
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('Employee', employeeSchema);
+projectSchema.pre('save', function(next) {
+    if (!this.actualStart) {
+        this.actualStart = this.planStart;
+    }
+    if (!this.actualEnd) {
+        this.actualEnd = this.planEnd;
+    }
+    next();
+});
+
+module.exports = mongoose.model('Project', projectSchema);

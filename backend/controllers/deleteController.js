@@ -1,18 +1,25 @@
 const User = require('../model/User');
 
 const deleteUser = async (req, res) => {
-    const { userId } = req.params; // Assuming userId is passed as a route parameter
-    if (!userId) return res.status(400).json({ 'message': 'User ID is required.' });
+    // On client, also delete the accessToken
 
-    try {
-        // Delete the user by ID
-        const result = await User.findByIdAndDelete(userId).exec();
-        if (!result) return res.status(404).json({ 'message': 'User not found.' });
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(204); 
+    const refreshToken = cookies.jwt;
 
-        res.status(200).json({ 'success': 'User deleted successfully.' });
-    } catch (err) {
-        res.status(500).json({ 'message': err.message });
+    // Is refreshToken in db?
+    const foundUser = await User.findOne({ refreshToken }).exec();
+    if (!foundUser) {
+        res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+        return res.sendStatus(204);
     }
-}
+
+    // Delete user from db
+    const result = await User.deleteOne({ _id: foundUser._id });
+    console.log(result);
+
+    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
+    res.sendStatus(204);
+};
 
 module.exports = { deleteUser };
