@@ -16,33 +16,33 @@ const Dashboard = () => {
             <div className="Row">
             <h1>Your Project Management Glint</h1>
             <br />
-            <p>Welcome. Hope your project is on track?</p>
+            <p>Your project Charts and Status will be here</p>
             </div>
             <div >
                 <Button
                     color={"dodgerblue"}
-                    text={'Go to the Admin page'}
+                    text={'Go to Admin page'}
                     onClick={() => navigate('/admin')}
                 />
                 <Button
                     color={"dodgerblue"}
-                    text={'Go to the Editor page'}
+                    text={'Go to Project Editor page'}
                     onClick={() => navigate('/editor')}
                 />
                 <Button
                     color={"dodgerblue"}
                     text={'Create Project'}
-                    onClick={() => navigate('/employees')}
+                    onClick={() => navigate('/projects/post')}
                 />
                 <Button
                     color={"dodgerblue"}
-                    text={'Go to the Lounge'}
-                    onClick={() => navigate('/lounge')}
+                    text={'View Projects'}
+                    onClick={() => navigate('/projects/get')}
                 />
                 <Button
                     color={"dodgerblue"}
-                    text={'Go to the Linkpage'}
-                    onClick={() => navigate('/linkpage')}
+                    text={'Chat'}
+                    onClick={() => navigate('/chat')}
                 />
                 <Button
                     color={"red"}

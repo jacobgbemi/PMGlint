@@ -8,13 +8,12 @@ const Lounge = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/linkpage'); // linkpage
+        navigate('/home'); 
     }
     return (
         <section>
-            <h1>The Lounge</h1>
+            <h2>Chat Team Member</h2>
             <br />
-            <p>Admins and Editors can hang out here.</p>
             <div className="flexGrow">
                 <Button
                     color={"dodgerblue"}

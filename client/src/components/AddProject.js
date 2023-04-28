@@ -1,14 +1,20 @@
 import { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from '../api/axios';
-// import { Link } from "react-router-dom";
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
+import Button from "./Button";
+import useLogout from "../hooks/useLogout";
 
 
-const REGISTER_URL = '/employees';
+const PROJECT_URL = '/projects/post';
 
 const AddProject = () => {
+    const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+
     const projRef = useRef();
+    const managerRef = useRef();
     const errRef = useRef();
 
     const [title, setTitle] = useState('');
@@ -18,12 +24,7 @@ const AddProject = () => {
     const [managerFocus, setManagerFocus] = useState(false);
 
     const [planStart, setPlanStart] = useState('');
-
     const [planEnd, setPlanEnd] = useState('');
-
-    // const [actualStart, setActualStart] = useState('');
-
-    // const [actualEnd, setActualEnd] = useState('');
 
     const [success, setSuccess] = useState(false);
     const [errMsg, setErrMsg] = useState('');
@@ -32,32 +33,35 @@ const AddProject = () => {
         projRef.current.focus();
     }, [])
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
      
         try {
-            const response = await axios.post(REGISTER_URL,
+            const response = await axiosPrivate.post(PROJECT_URL,
                 JSON.stringify({ title, manager, planStart, planEnd }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     withCredentials: true
                 }
             );
+           
             // TODO: remove console.logs before deployment
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response))
             setSuccess(true);
+
             //clear state and controlled inputs
             setTitle('');
             setManager('');
             setPlanStart('');
             setPlanEnd('');
-            // setActualStart('');
-            // setActualEnd('');
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
+            } else if (err.response?.status === 401) {
+                setErrMsg('Unauthorized');
+            } else if (err.response?.status === 403) {
+                setErrMsg('Forbidden');
             } else if (err.response?.status === 409) {
                 setErrMsg('Project name taken');
             } else {
@@ -67,13 +71,23 @@ const AddProject = () => {
         }
     }
 
+    const logout = useLogout();
+
+    const signOut = async () => {
+        await logout();
+        navigate('/home'); 
+    }
+
     return (
         <>
             {success ? (
                 <section >
                     <h1>Success!</h1>
                     <p>
-                        <a href="/admin">Create Project</a>
+                        <a href="/projects/post">Create Another Project</a>
+                    </p>
+                    <p>
+                        <a href="/projects/get">View Projects</a>
                     </p>
                 </section>
             ) : (
@@ -102,7 +116,7 @@ const AddProject = () => {
                         <input
                             type="text"
                             id="manager"
-                            ref={projRef}
+                            ref={managerRef}
                             autoComplete="off"
                             onChange={(e) => setManager(e.target.value)}
                             value={manager}
@@ -122,8 +136,6 @@ const AddProject = () => {
                             onChange={(e) => setPlanStart(e.target.value)}
                             value={planStart}
                             required
-                            // onFocus={() => setPlanStartFocus(true)}
-                            // onBlur={() => setPlanStartFocus(false)}
                         />
 
                         <label htmlFor="planend"> Planned End Date: </label>
@@ -133,34 +145,24 @@ const AddProject = () => {
                             onChange={(e) => setPlanEnd(e.target.value)}
                             value={planEnd}
                             required
-                            // onFocus={() => setPlanEndFocus(true)}
-                            // onBlur={() => setPlanEndFocus(false)}
                         />
 
-                        {/* <label htmlFor="actualstart"> Actual Start Date: </label>
-                        <input
-                            type="date"
-                            id="actualstart"
-                            onChange={(e) => setActualStart(e.target.value)}
-                            value={actualStart}
-                            required
-                            // onFocus={() => setActualStartFocus(true)}
-                            // onBlur={() => setActualStartFocus(false)}
-                        />
-
-                        <label htmlFor="actualend"> Planned End Date: </label>
-                        <input
-                            type="date"
-                            id="actualend"
-                            onChange={(e) => setActualEnd(e.target.value)}
-                            value={actualEnd}
-                            required
-                            // onFocus={() => setActualEndFocus(true)}
-                            // onBlur={() => setActualEndFocus(false)}
-                        /> */}
 
                         <button >Create Project</button>
                     </form>
+                    <br />
+                    <div className="flexGrow">
+                        <Button
+                            color={"dodgerblue"}
+                            text={'Go back to Dashboard'}
+                            onClick={() => navigate('/')}
+                        />
+                        <Button
+                            color={"red"}
+                            text={'Sign Out'}
+                            onClick={signOut}
+                        />
+                    </div>
                 </section>
             )}
         </>

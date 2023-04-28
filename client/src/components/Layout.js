@@ -10,27 +10,27 @@ const Layout = () => {
     return (
         <Container>
             {/* Header Begins */}
-            <Navbar bg="primary" expand="lg">
-                <Navbar.Brand href="/linkpage">
+            <Navbar bg="black" expand="lg" fixed="top" id="navbar">
+                <Navbar.Brand href="home">
                 <img
                     alt=""
                     src="/logo3.jpg"
-                    width="30"
-                    height="30"
+                    width="40"
+                    height="40"
                     className="d-inline-block align-top"
                 />{' '}
-                PMGlint
+                <span className="navlink">PMGlint</span>
                 </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle aria-controls="basic-navbar-nav" id="nav-collapse"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav >
-                    <Nav.Link href="/linkpage">Home</Nav.Link>
-                    <Nav.Link href="/">Dashboard</Nav.Link>
-                    <Nav.Link href="/employees">Create Project</Nav.Link>
-                    <Nav.Link href="/admin">Admin</Nav.Link>
-                    <Nav.Link href="/editor">Project Editor</Nav.Link>
-                    <Nav.Link href="/lounge">Chat</Nav.Link>
-                 
+                    <Nav.Link href="/home" className="navlink">Home</Nav.Link>
+                    <Nav.Link href="/" className="navlink">Dashboard</Nav.Link>
+                    <Nav.Link href="/projects/post" className="navlink">Create Project</Nav.Link>
+                    <Nav.Link href="/projects/get" className="navlink">View Project</Nav.Link>
+                    <Nav.Link href="/admin" className="navlink">Admin</Nav.Link>
+                    <Nav.Link href="/editor" className="navlink">Project Editor</Nav.Link>
+                    <Nav.Link href="/chat" className="navlink">Chat</Nav.Link>
                 </Nav>
                 </Navbar.Collapse>
             </Navbar>
@@ -43,7 +43,7 @@ const Layout = () => {
 
             {/* Footer Begins */}
             <footer>
-                <p>Copyright &copy; 2021</p>
+                <p>PMGlint &copy; 2023</p>
                 <Button
                     color={"dodgerblue"}
                     text={'About Us'}

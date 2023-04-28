@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useLogout from "../hooks/useLogout";
 import Button from './Button'
-import Users from './Users';
-// import AddProject from './AddProject';
-// import GetProjects from './GetProjects';
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -11,15 +8,21 @@ const Admin = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/linkpage'); // linkpage
+        navigate('/home');
     }
     return (
         <section>
-            <h1>Admins Page</h1>
-            <br />
-            <Users />
-            <br />
-            {/* <AddProject /> */}
+            <h2>Admins Page</h2>
+            <Button
+                color={"dodgerblue"}
+                text={'Users List'}
+                onClick={() => navigate('/users')}
+            />
+            <Button
+                color={"dodgerblue"}
+                text={'Projects List'}
+                onClick={() => navigate('/projects/get')}
+            />
             <br />
             <div className="flexGrow">
                 <Button

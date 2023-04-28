@@ -9,11 +9,12 @@
 html {
     font-family: 'Nunito', sans-serif;
     font-size: 22px;
-    color: #fff;
+    
 }
 
 body {
     font-family: 'Poppins', sans-serif;
+    color: #fff;
   }
 
   .container {
@@ -26,7 +27,25 @@ body {
     border-radius: 5px;
   }
 
+  #navbar {
+    max-width: 90%;
+    margin: 5px auto;
+    border: 1px solid steelblue;
+    border-radius: 5px;
+  }
+
+  .navlink:hover {
+    background-color: white;
+    color: dodgerblue;
+  }
   
+  #nav-collapse {
+    background-color: white;
+    border: none;
+    /* color: white; */
+    /* max-width: 10px; */
+  }
+
   .header {
     display: flex;
     /* justify-content: space-between; */
@@ -49,7 +68,7 @@ body {
 
 section {
     width: 100%;
-    max-width: 420px;
+    max-width: 460px;
     min-height: 400px;
     display: flex;
     flex-direction: column;

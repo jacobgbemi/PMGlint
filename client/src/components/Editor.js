@@ -8,13 +8,17 @@ const Editor = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/linkpage'); // linkpage
+        navigate('/home'); 
     }
     return (
         <section>
-            <h1>Editors Page</h1>
+            <h2>Editors Page</h2>
             <br />
-            <p>You must have been assigned an Editor role.</p>
+            <Button
+                color={"dodgerblue"}
+                text={'Projects List'}
+                onClick={() => navigate('/projects/get')}
+            />
             <div className="flexGrow">
                 <Button
                     color={"dodgerblue"}
