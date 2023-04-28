@@ -148,7 +148,7 @@ const AddProject = () => {
                         />
 
 
-                        <button >Create Project</button>
+                        <button className="btn btn-primary">Create Project</button>
                     </form>
                     <br />
                     <div className="flexGrow">
