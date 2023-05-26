@@ -19,6 +19,11 @@ const Editor = () => {
                 text={'Projects List'}
                 onClick={() => navigate('/projects/get')}
             />
+            <Button
+                color={"dodgerblue"}
+                text={'Create Project'}
+                onClick={() => navigate('/projects/post')}
+            />
             <div className="flexGrow">
                 <Button
                     color={"dodgerblue"}

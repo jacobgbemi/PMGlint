@@ -5,12 +5,19 @@ import { format } from 'date-fns';
 import { useNavigate, useLocation } from "react-router-dom";
 import Button from './Button'
 import Table from 'react-bootstrap/Table';
+import useDelete from "../hooks/useDelete"
 
 const Projects = () => {
     const [projects, setProjects] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+
+    const deleteProj = useDelete();
+    // const delProj = async () => {
+    //     await deleteProj()
+    // };
+
 
     useEffect(() => {
         let isMounted = true;
@@ -81,6 +88,7 @@ const Projects = () => {
                                         <Button
                                             color={"red"}
                                             text={'Delete'}
+                                            onClick={deleteProj}
                                             
                                         />
                                     </td>

@@ -17,7 +17,7 @@ const Project = ({ id }) => {
         let isMounted = true;
         const controller = new AbortController();
 
-        const getProject = async () => {
+        const getProject = async (id) => {
             try {
                 const response = await axios.get(`/projects/${id}`, {
                     signal: controller.signal

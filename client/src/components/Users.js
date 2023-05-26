@@ -3,7 +3,7 @@ import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 // import { format } from 'date-fns';
 import Button from './Button'
-// import useDelete from "../hooks/useDelete"
+import useDelete from "../hooks/useDelete"
 import Table from 'react-bootstrap/Table';
 // import useAuth from "../hooks/useAuth";
 
@@ -15,11 +15,10 @@ const Users = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    // const deleteUser = useDelete();
-    // const delUser = async (userId) => {
-    //     await deleteUser(userId);
-    
-    // }
+    const deleteUser = useDelete();
+    const delUser = async (id) => {
+        await deleteUser(id);
+    }
 
     useEffect(() => {
         let isMounted = true;
@@ -69,7 +68,7 @@ const Users = () => {
                                 <Button
                                     color={"red"}
                                     text={'Delete'}
-                                 
+                                    onClick={() => delUser(user._id)}
                                 />
                                 
                                     {/* <useDelete userId={user._id} authToken={auth?.accessToken} /> */}

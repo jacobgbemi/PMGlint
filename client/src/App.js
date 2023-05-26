@@ -43,7 +43,7 @@ function App() {
             <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="projects/get" element={<GetProjects />} />
-              <Route path="projects/id" element={<GetProject />} />
+              <Route path="projects/:id" element={<GetProject />} />
             </Route>
            
             <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
