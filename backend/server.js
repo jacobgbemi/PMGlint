@@ -42,17 +42,17 @@ app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
 // app.use('/projects/get', require('./routes/api/projects'));
-app.use('/projects/id', require('./routes/api/projects'));
+// app.use('/projects/id', require('./routes/api/projects'));
 
 // required roles permission
 app.use(verifyJWT);
-app.use('/projects/post', require('./routes/api/projects'));
-app.use('/projects/get', require('./routes/api/projects'));
-app.use('/projects/delete', require('./routes/api/projects'));
-app.use('/projects/id', require('./routes/api/projects'));
+app.use('/projects', require('./routes/api/projects'));
+// app.use('/projects/get', require('./routes/api/projects'));
+// app.use('/projects/delete', require('./routes/api/projects'));
+// app.use('/projects/id', require('./routes/api/projects'));
 
 app.use('/users', require('./routes/api/users'));
-app.use('/users/id', require('./routes/api/users'));
+// app.use('/users/id', require('./routes/api/users'));
 
 app.use(errorHandler);
 
