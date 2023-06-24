@@ -27,7 +27,7 @@ const Layout = () => {
                     <Nav.Link href="/home" className="navlink">Home</Nav.Link>
                     <Nav.Link href="/" className="navlink">Dashboard</Nav.Link>
                     {/* <Nav.Link href="/projects/post" className="navlink">Create Project</Nav.Link> */}
-                    <Nav.Link href="/projects/get" className="navlink">View Project</Nav.Link>
+                    <Nav.Link href="/projects" className="navlink">View Project</Nav.Link>
                     <Nav.Link href="/admin" className="navlink">Admin</Nav.Link>
                     <Nav.Link href="/editor" className="navlink">Project Editor</Nav.Link>
                     <Nav.Link href="/chat" className="navlink">Chat</Nav.Link>

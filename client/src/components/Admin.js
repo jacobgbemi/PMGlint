@@ -1,10 +1,19 @@
 import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 import useLogout from "../hooks/useLogout";
-import Button from './Button'
+import Button from './Button';
+import AddProject from "./AddProject";
 
 const Admin = () => {
     const navigate = useNavigate();
     const logout = useLogout();
+
+    const [isCreatingProject, setIsCreatingProject] = useState(false);
+
+    const handleCreateProject = () => {
+        setIsCreatingProject(true);
+        // window.open('/add-project', '_blank');
+    };
 
     const signOut = async () => {
         await logout();
@@ -21,8 +30,15 @@ const Admin = () => {
             <Button
                 color={"dodgerblue"}
                 text={'Projects List'}
-                onClick={() => navigate('/projects/get')}
+                onClick={() => navigate('/projects')}
             />
+            <Button
+                color={"dodgerblue"}
+                text={'Create Project'}
+                onClick={handleCreateProject}
+            />
+            {isCreatingProject && <AddProject />}
+            
             <br />
             <div className="flexGrow">
                 <Button

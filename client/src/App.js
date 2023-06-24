@@ -12,11 +12,13 @@ import Home from './components/Home';
 import RequireAuth from './components/RequireAuth';
 import PersistLogin from './components/PersistLogin';
 import { Routes, Route } from 'react-router-dom';
-import AddProject from './components/AddProject';
 import GetProjects from './components/GetProjects';
-import GetProject from './components/GetProject';
+import EditProject from './components/EditProject';
 import Users from './components/Users';
-
+// import useAxiosPrivate from "./hooks/useAxiosPrivate";
+// import { useNavigate } from "react-router-dom";
+// import { useState } from 'react';
+import EditUser from './components/EditUser';
 
 
 const ROLES = {
@@ -26,6 +28,12 @@ const ROLES = {
 }
 
 function App() {
+  // const axiosPrivate = useAxiosPrivate();
+  // const navigate = useNavigate();
+  // const [users, setUsers] = useState([]);
+
+  
+
   return (
     <>
       <Routes>
@@ -37,13 +45,12 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="unauthorized" element={<Unauthorized />} />
           
-
           {/* we want to protect these routes */}
           <Route element={<PersistLogin />}>
             <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
               <Route path="/" element={<Dashboard />} />
-              <Route path="projects/get" element={<GetProjects />} />
-              <Route path="projects/:id" element={<GetProject />} />
+              <Route path="projects" element={<GetProjects />} />
+              <Route path="chat" element={<Chat />} />
             </Route>
            
             <Route element={<RequireAuth allowedRoles={[ROLES.Editor]} />}>
@@ -52,15 +59,13 @@ function App() {
 
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path="admin" element={<Admin />} />
-              <Route path="users" element={<Users />} />
-              <Route path="users/remove" element={<Users />} />
+              <Route path="users">
+                <Route index element={<Users />} />
+                <Route path=":id" element={<EditUser />} />
+              </Route>
+             
             </Route>
-
-            <Route element={<RequireAuth allowedRoles={[ROLES.Editor, ROLES.Admin]} />}>
-              <Route path="projects/post" element={<AddProject />} />
-              <Route path="chat" element={<Chat />} />
-            </Route>
-          </Route>
+          </Route> {/* End Persistent Login */}
 
           {/* catch all */}
           <Route path="*" element={<Missing />} />

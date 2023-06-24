@@ -7,7 +7,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Button from './Button'
 import Table from 'react-bootstrap/Table';
 
-const Project = ({ id }) => {
+const EditProject = ({ id }) => {
     const [project1, setProject] = useState();
     // const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
@@ -100,4 +100,4 @@ const Project = ({ id }) => {
     );
 };
 
-export default Project;
+export default EditProject;

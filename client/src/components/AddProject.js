@@ -7,7 +7,7 @@ import Button from "./Button";
 import useLogout from "../hooks/useLogout";
 
 
-const PROJECT_URL = '/projects/post';
+const PROJECT_URL = '/projects';
 
 const AddProject = () => {
     const axiosPrivate = useAxiosPrivate();
@@ -150,19 +150,7 @@ const AddProject = () => {
 
                         <button className="btn btn-primary">Create Project</button>
                     </form>
-                    <br />
-                    <div className="flexGrow">
-                        <Button
-                            color={"dodgerblue"}
-                            text={'Go back to Dashboard'}
-                            onClick={() => navigate('/')}
-                        />
-                        <Button
-                            color={"red"}
-                            text={'Sign Out'}
-                            onClick={signOut}
-                        />
-                    </div>
+                 
                 </section>
             )}
         </>

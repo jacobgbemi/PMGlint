@@ -8,7 +8,7 @@ const Dashboard = () => {
 
     const signOut = async () => {
         await logout();
-        navigate('/linkpage'); // linkpage
+        navigate('/home'); // linkpage
     }
 
     return (
@@ -29,15 +29,11 @@ const Dashboard = () => {
                     text={'Go to Project Editor page'}
                     onClick={() => navigate('/editor')}
                 />
-                <Button
-                    color={"dodgerblue"}
-                    text={'Create Project'}
-                    onClick={() => navigate('/projects/post')}
-                />
+                
                 <Button
                     color={"dodgerblue"}
                     text={'View Projects'}
-                    onClick={() => navigate('/projects/get')}
+                    onClick={() => navigate('/projects')}
                 />
                 <Button
                     color={"dodgerblue"}
@@ -49,7 +45,7 @@ const Dashboard = () => {
                     text={'Sign Out'}
                     onClick={signOut}
                 />
-
+                
             </div>
             
         </section>

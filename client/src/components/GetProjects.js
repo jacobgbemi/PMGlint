@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import useAxiosPrivate from "../hooks/useAxiosPrivate";
 import { format } from 'date-fns';
-// import dateFormat from 'dateformat';
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import Button from './Button'
 import Table from 'react-bootstrap/Table';
-import useDelete from "../hooks/useDelete"
+// import useDelete from "../hooks/useDelete"
 
 const Projects = () => {
     const [projects, setProjects] = useState();
@@ -13,11 +12,18 @@ const Projects = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const deleteProj = useDelete();
-    // const delProj = async () => {
-    //     await deleteProj()
-    // };
+    // const { id } = useParams();
 
+    // const handleDeleteProject = async (id) => {
+    //   try {
+    //       const projects = await axiosPrivate.delete('/projects');
+    //       const project = projects.filter((project) => project.id !== id);
+    //       setProjects(project);
+    //       navigate('/');
+    //   } catch (err) {
+    //       console.log(`Error: ${err.message}`);
+    //   }
+    // }
 
     useEffect(() => {
         let isMounted = true;
@@ -25,7 +31,7 @@ const Projects = () => {
 
         const getProjects = async () => {
             try {
-                const response = await axiosPrivate.get('/projects/get', {
+                const response = await axiosPrivate.get('/projects', {
                     signal: controller.signal
                 });
                 console.log(response.data);
@@ -42,7 +48,7 @@ const Projects = () => {
             isMounted = false;
             controller.abort();
         }
-    }, [])
+    }, [axiosPrivate, location, navigate, setProjects])
 
     return (
         <article>
@@ -80,7 +86,7 @@ const Projects = () => {
                                         <Button
                                             color={"grey"}
                                             text={'Open'}
-                                            onClick={() => navigate(`/projects/${project._id}`)}
+                                            // onClick={() => navigate(`/projects/${project._id}`)}
                                             
                                         />
                                     </td>
@@ -88,7 +94,7 @@ const Projects = () => {
                                         <Button
                                             color={"red"}
                                             text={'Delete'}
-                                            onClick={deleteProj}
+                                            // onClick={handleDeleteProject(project._id)}
                                             
                                         />
                                     </td>
